@@ -2,6 +2,7 @@ package sol;
 
 import src.IGraph;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -9,6 +10,7 @@ import java.util.Set;
  */
 public class TravelGraph implements IGraph<City, Transport> {
 
+    private ArrayList vertices; //You will need a data structure to store all of these vertices
     @Override
     public void addVertex(City vertex) {
         // TODO: implement this method!
