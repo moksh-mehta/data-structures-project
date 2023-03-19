@@ -1,0 +1,6 @@
+origin,destination,type,price,duration
+Hyderabad,Bangalore,bus,20,60
+Bangalore,Hyderabad,bus,20,60
+Chennai,Bangalore,train,15,30
+Bangalore,Chennai,bus,5,180
+Chennai,Hyderabad,plane,100,180

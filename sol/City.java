@@ -20,6 +20,7 @@ public class City implements IVertex<Transport> {
     public City(String name) {
         // TODO: implement this method
         this.name = name;
+        this.outgoing = new HashSet<Transport>();
     }
 
     // TODO: implement this method
@@ -36,6 +37,6 @@ public class City implements IVertex<Transport> {
 
     @Override
     public String toString() {
-        return this.name; // TODO
+        return this.name;
     }
 }

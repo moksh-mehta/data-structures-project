@@ -1,6 +1,7 @@
 package sol;
 
 import src.ITravelController;
+import src.TransportType;
 import src.TravelCSVParser;
 
 import java.io.IOException;
@@ -36,6 +37,11 @@ public class TravelController implements ITravelController<City, Transport> {
             return null; // need explicit return null to account for Void type
         };
 
+        Function<Map<String, String>, Void> addConnections = map -> {
+            this.buildEdge(map.get("origin"), map.get("destination"),
+                    map.get("type"), map.get("price"), map.get("duration"));
+            return null;
+        };
         // TODO: create a variable that is of type Function<Map<String, String>, Void>
         //       that will build connections between nodes in a graph. Keep in mind
         //       that the input to this function is a hashmap that relates the
@@ -56,8 +62,22 @@ public class TravelController implements ITravelController<City, Transport> {
 
         // hint: note that parseLocations and parseTransportation can
         //       throw IOExceptions. How can you handle these calls cleanly?
-
+        try {
+            parser.parseTransportation(transportFile, addConnections);
+        } catch (IOException e) {
+            return "Error parsing file: " + transportFile;
+        }
         return "Successfully loaded cities and transportation files.";
+    }
+
+    public void buildEdge(String origin, String destination, String type,
+                          String price, String duration) {
+        this.graph.getCityByName(origin)
+                .addOut(new Transport(this.graph.getCityByName(origin),
+                        this.graph.getCityByName(destination),
+                        TransportType.fromString(type),
+                        Double.parseDouble(price),
+                        Double.parseDouble(duration)));
     }
 
     @Override
