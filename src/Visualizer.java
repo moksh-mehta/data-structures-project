@@ -73,9 +73,9 @@ public class Visualizer<V extends IVertex<E>, E extends ITransport & IEdge<V>> {
      * @param args Unused
      */
     public static void main(String[] args) {
-        String citiesFilepath = "data/cities2.csv";
-        String transportFilepath = "data/transport2.csv";
-        String outputFilepath = "data/graphs/graph2.dot";
+        String citiesFilepath = "data/cities1.csv";
+        String transportFilepath = "data/transport1.csv";
+        String outputFilepath = "data/graphs/graph1.dot";
 
         TravelController controller = new TravelController();
         Visualizer<City, Transport> viz = new Visualizer<>();

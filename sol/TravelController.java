@@ -83,19 +83,35 @@ public class TravelController implements ITravelController<City, Transport> {
     @Override
     public List<Transport> fastestRoute(String source, String destination) {
         // TODO: implement this method!
-        return new ArrayList<>();
+        Function<Transport, Double> transportTime =
+            transport -> {
+                return transport.getMinutes();
+            };
+        Dijkstra dijkstra = new Dijkstra();
+        return dijkstra.getShortestPath(this.graph,
+                this.graph.getCityByName(source),
+                this.graph.getCityByName(destination),
+                transportTime);
     }
 
     @Override
     public List<Transport> cheapestRoute(String source, String destination) {
-        // TODO: implement this method!
-        return new ArrayList<>();
+        Function<Transport, Double> transportCost =
+                transport -> {
+                    return transport.getPrice();
+                };
+        Dijkstra dijkstra = new Dijkstra();
+        return dijkstra.getShortestPath(this.graph,
+                this.graph.getCityByName(source),
+                this.graph.getCityByName(destination),
+                transportCost);
     }
 
     @Override
     public List<Transport> mostDirectRoute(String source, String destination) {
-        // TODO: implement this method!
-        return new ArrayList<>();
+        BFS bfs = new BFS();
+        return bfs.getPath(this.graph, this.graph.getCityByName(source),
+                this.graph.getCityByName(destination));
     }
 
     /**
