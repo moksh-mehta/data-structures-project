@@ -26,6 +26,10 @@ public class TravelGraphTest {
 
         TravelGraph graph = this.controller.getGraph();
     }
+
+    /**
+     * Testing the TravelGraph
+     */
     @Test
     public void testTravelGraph(){
         TravelGraph t1 = new TravelGraph();

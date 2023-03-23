@@ -7,16 +7,18 @@ public enum TransportType {
     BUS("bus"),
     TRAIN("train"),
     PLANE("plane");
-
     private final String label;
 
+    /**
+     * Constructor for the enum
+     * @param label
+     */
     TransportType(String label) {
         this.label = label;
     }
 
     /**
      * returns the enum corresponding to the inputted string
-     *
      * @param typeString string to be converted to enum
      * @return TransportType enum
      */

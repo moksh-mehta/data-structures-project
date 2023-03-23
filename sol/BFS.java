@@ -4,7 +4,6 @@ import src.IBFS;
 import src.IEdge;
 import src.IGraph;
 import src.IVertex;
-
 import java.util.*;
 
 /**
@@ -15,16 +14,21 @@ import java.util.*;
 public class BFS<V extends IVertex<E>, E extends IEdge<V>> implements IBFS<V, E> {
 
     // TODO: implement the getPath method!
+
+    /**
+     * Method that gets the path from a start to end vertex as a list of nodes.
+     * @param graph the graph including the vertices
+     * @param start the start vertex
+     * @param end   the end vertex
+     * @return
+     */
     @Override
     public List<E> getPath(IGraph<V, E> graph, V start, V end) {
         LinkedList<V> toCheck = new LinkedList<>();
         HashSet<V> visited = new HashSet<>();
-
         HashMap<V, E> h1 = new HashMap<>();
-
         visited.add(start);
         toCheck.add(start);
-
         while (!toCheck.isEmpty()) {
             V checkingVertex = toCheck.removeFirst();
             if (end.equals(checkingVertex)) {
@@ -41,9 +45,15 @@ public class BFS<V extends IVertex<E>, E extends IEdge<V>> implements IBFS<V, E>
         return new LinkedList<E>();
     }
 
-    public List<E> backtrack(HashMap<V, E> h1, V end,
-                                   V start) {
-        LinkedList<E> path = new LinkedList<>();
+    /**
+     * Method that gets the reverse path from an end to start node
+     * @param h1 hashmap
+     * @param end the end vertex
+     * @param start the start vertex
+     * @return
+     */
+    public List<E> backtrack(HashMap<V, E> h1, V end, V start) {
+        LinkedList<E> path = new LinkedList<E>();
         V currCity = end;
         while (currCity != start) {
             path.addFirst(h1.get(currCity));

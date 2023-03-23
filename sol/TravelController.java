@@ -27,6 +27,12 @@ public class TravelController implements ITravelController<City, Transport> {
     public TravelController() {
     }
 
+    /**
+     * A method that loads the CSV
+     * @param citiesFile    the filename of the cities csv
+     * @param transportFile the filename of the transportations csv
+     * @return Success/failure messages as strings
+     */
     @Override
     public String load(String citiesFile, String transportFile) {
         this.graph = new TravelGraph();
@@ -70,6 +76,14 @@ public class TravelController implements ITravelController<City, Transport> {
         return "Successfully loaded cities and transportation files.";
     }
 
+    /**
+     * Method that builds an edge from string values
+     * @param origin origin location
+     * @param destination destination location
+     * @param type the type of transportation
+     * @param price the price of transportation
+     * @param duration the duration of transportation
+     */
     public void buildEdge(String origin, String destination, String type,
                           String price, String duration) {
         this.graph.getCityByName(origin)
@@ -80,6 +94,12 @@ public class TravelController implements ITravelController<City, Transport> {
                         Double.parseDouble(duration)));
     }
 
+    /**
+     * Method that finds the fastest route from a source to a destination using Dijkstra's
+     * @param source      the name of the source city
+     * @param destination the name of the destination city
+     * @return The list of transports in the fastest route
+     */
     @Override
     public List<Transport> fastestRoute(String source, String destination) {
         // TODO: implement this method!
@@ -94,6 +114,12 @@ public class TravelController implements ITravelController<City, Transport> {
                 transportTime);
     }
 
+    /**
+     * Method that finds the cheapest route from a source to a destination using Dijkstra's
+     * @param source      the name of the source city
+     * @param destination the name of the destination city
+     * @return The list of transports in the fastest route
+     */
     @Override
     public List<Transport> cheapestRoute(String source, String destination) {
         Function<Transport, Double> transportCost =
@@ -107,6 +133,12 @@ public class TravelController implements ITravelController<City, Transport> {
                 transportCost);
     }
 
+    /**
+     * Method that finds the most direct route from a source to a destination using BFS
+     * @param source      the name of the source city
+     * @param destination the name of the destination city
+     * @return The list of transports in the most direct route
+     */
     @Override
     public List<Transport> mostDirectRoute(String source, String destination) {
         BFS bfs = new BFS();

@@ -4,7 +4,6 @@ import src.IDijkstra;
 import src.IEdge;
 import src.IGraph;
 import src.IVertex;
-
 import java.util.*;
 import java.util.function.Function;
 
@@ -19,6 +18,15 @@ import static java.lang.Double.MAX_VALUE;
 public class Dijkstra<V extends IVertex<E>, E extends IEdge<V>> implements IDijkstra<V, E> {
 
     // TODO: implement the getShortestPath method!
+
+    /**
+     * Gets the shortest path from a source to the destination using Dijkstra's algorithm
+     * @param graph       the graph including the vertices
+     * @param source      the source vertex
+     * @param destination the destination vertex
+     * @param edgeWeight  the weight of an edge
+     * @return List of edges in the shortest path
+     */
     @Override
     public List<E> getShortestPath(IGraph<V, E> graph, V source, V destination,
                                    Function<E, Double> edgeWeight) {
@@ -59,6 +67,13 @@ public class Dijkstra<V extends IVertex<E>, E extends IEdge<V>> implements IDijk
         return this.backtracking(source, destination, cameFrom);
     }
 
+    /**
+     * Backtracking with Dijkstra's algorithm
+     * @param source
+     * @param destination
+     * @param cameFrom
+     * @return A list of noeds from the destination back to the source
+     */
     public List<E> backtracking(V source, V destination,
                                 HashMap<V,E> cameFrom) {
         LinkedList<E> path = new LinkedList<>();

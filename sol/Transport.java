@@ -35,11 +35,20 @@ public class Transport implements IEdge<City>, ITransport {
     }
 
     // TODO: implement this method
+
+    /**
+     * Getter method for the source
+     * @return the source field
+     */
     @Override
     public City getSource() {
         return this.source;
     }
 
+    /**
+     * Getter method for the target
+     * @return the target
+     */
     // TODO: implement this method
     @Override
     public City getTarget() {
@@ -47,23 +56,41 @@ public class Transport implements IEdge<City>, ITransport {
     }
 
     // TODO: implement this method
+
+    /**
+     * Getter method for the price
+     * @return the price
+     */
     @Override
     public double getPrice() {
         return this.price;
     }
 
     // TODO: implement this method
+
+    /**
+     * Getter method for the minutes
+     * @return the minutes
+     */
     @Override
     public double getMinutes() {
         return this.minutes;
     }
 
     // TODO: implement this method
+    /**
+     * Getter method for the type
+     * @return the type
+     */
     @Override
     public String getType() {
         return this.type.getLabel();
     }
 
+    /**
+     * Converts a Transport to a String
+     * @return string representation of a transport
+     */
     @Override
     public String toString() {
         return this.getSource().toString() + " -> " + this.getTarget().toString() +
