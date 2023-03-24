@@ -1,16 +1,9 @@
 package sol;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.Before;
-import src.*;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import org.junit.Test;
+import src.TransportType;
+import src.Visualizer;
 
 public class TravelGraphTest {
     private TravelController controller;
@@ -31,21 +24,37 @@ public class TravelGraphTest {
      * Testing the TravelGraph
      */
     @Test
-    public void testTravelGraph(){
-        TravelGraph t1 = new TravelGraph();
-        t1.addVertex(new City("boston"));
-        City Boston = t1.getCityByName("boston");
-        t1.addVertex(new City("providence"));
-        City Providence = t1.getCityByName("providence");
-        t1.addEdge(Boston, new Transport(Boston, Providence,
-                TransportType.BUS, 15, 120));
+    public void testTravelGraph() {
 
-        System.out.println(this.controller.mostDirectRoute("Providence",
-                "Boston"));
+        TravelGraph cities1 = new TravelGraph();
+
+        City Boston = new City("Boston");
+        City Providence = new City("Providence");
+        City NYC = new City("New York City");
+
+        cities1.addVertex(Boston);
+        cities1.addVertex(Providence);
+        cities1.addVertex(NYC);
+
+        // create and insert edges
+        Transport Plane1 = new Transport(NYC, Boston, TransportType.PLANE, 267, 50);
+        Transport Plane2 = new Transport(Boston, NYC, TransportType.PLANE, 267, 50);
+        Transport Bus1 = new Transport(NYC, Providence, TransportType.BUS, 40, 225);
+        Transport Bus2 = new Transport(Boston, Providence, TransportType.BUS, 7, 150);
+        Transport Bus3 = new Transport(Providence, Boston, TransportType.BUS, 7, 150);
+        Transport Train1 = new Transport(Boston, Providence, TransportType.TRAIN, 13, 80);
+        Transport Train2 = new Transport(Providence, Boston, TransportType.TRAIN, 13, 80);
+
+        cities1.addEdge(NYC, Plane1);
+        cities1.addEdge(Boston, Plane2);
+        cities1.addEdge(NYC, Bus1);
+        cities1.addEdge(Boston, Bus2);
+        cities1.addEdge(Providence, Bus3);
+        cities1.addEdge(Boston, Train1);
+        cities1.addEdge(Providence, Train2);
 
         System.out.println(this.controller.cheapestRoute("Boston",
                 "Providence"));
-
 
     }
 }
