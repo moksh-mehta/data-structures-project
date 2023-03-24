@@ -96,10 +96,23 @@ public class DijkstraTest {
     // TODO: write more tests + make sure you test all the cases in your testing plan!
 
     @Test
-    public void testFastestNYCtoProvidence() {
+    public void testFastest1() {
         TravelController TC1 = new TravelController();
         TC1.load("data/cities1.csv", "data/transport1.csv");
+
         List<Transport> list = TC1.fastestRoute("New York City","Providence");
-        Assert.assertEquals(new Transport(new City("New York City"), new City("Boston"), TransportType.PLANE, 267.0, 50.0), list.get(0));
+        Assert.assertEquals(new Transport(new City("New York City"), new City("Boston"), TransportType.PLANE, 267, 50).toString(), list.get(0).toString());
+
+        List<Transport> list2 = TC1.fastestRoute("Boston","Providence");
+        Assert.assertEquals(new Transport(new City("Boston"), new City("Providence"), TransportType.TRAIN, 13, 80).toString(), list2.get(0).toString());
+    }
+
+    @Test
+    public void testCheapest1() {
+        TravelController TC1 = new TravelController();
+        TC1.load("data/cities1.csv", "data/transport1.csv");
+
+        List<Transport> list = TC1.cheapestRoute("Boston","Providence");
+        Assert.assertEquals(new Transport(new City("Boston"), new City("Providence"), TransportType.BUS, 7, 150).toString(),list.get(0).toString());
     }
 }
