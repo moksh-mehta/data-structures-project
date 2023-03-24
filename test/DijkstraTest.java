@@ -1,8 +1,13 @@
 package test;
 
+import org.junit.Assert;
 import org.junit.Test;
+import sol.City;
 import sol.Dijkstra;
+import sol.Transport;
+import sol.TravelController;
 import src.IDijkstra;
+import src.TransportType;
 import test.simple.SimpleEdge;
 import test.simple.SimpleGraph;
 import test.simple.SimpleVertex;
@@ -11,7 +16,6 @@ import java.util.List;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Your Dijkstra's tests should all go in this class!
@@ -42,6 +46,7 @@ public class DijkstraTest {
      *
      * TODO: create more setup methods!
      */
+
     private void createSimpleGraph() {
         this.graph = new SimpleGraph();
 
@@ -89,4 +94,12 @@ public class DijkstraTest {
     }
 
     // TODO: write more tests + make sure you test all the cases in your testing plan!
+
+    @Test
+    public void testFastestNYCtoProvidence() {
+        TravelController TC1 = new TravelController();
+        TC1.load("data/cities1.csv", "data/transport1.csv");
+        List<Transport> list = TC1.fastestRoute("New York City","Providence");
+        Assert.assertEquals(new Transport(new City("New York City"), new City("Boston"), TransportType.PLANE, 267.0, 50.0), list.get(0));
+    }
 }
