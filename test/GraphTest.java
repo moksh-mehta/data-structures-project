@@ -11,6 +11,7 @@ import test.simple.SimpleEdge;
 import test.simple.SimpleGraph;
 import test.simple.SimpleVertex;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -30,6 +31,8 @@ public class GraphTest {
     private SimpleVertex a;
     private SimpleVertex b;
     private SimpleVertex c;
+    private static final double DELTA = 0.001;
+
 
     private SimpleEdge edgeAB;
     private SimpleEdge edgeBC;
@@ -133,7 +136,7 @@ public class GraphTest {
                 fastestRoute3.get(0).toString());
         Assert.assertEquals(new Transport(new City("Boston"),
                         new City("New York City"),
-                        TransportType.PLANE, 257, 50).toString(),
+                        TransportType.PLANE, 267, 50).toString(),
                 fastestRoute3.get(1).toString());
         Assert.assertEquals(fastestRoute3.size(), 2);
     }
@@ -231,7 +234,7 @@ public class GraphTest {
                 graph3fastest2.get(0).toString());
         Assert.assertEquals(new Transport(new City("Bangalore"),
                 new City("Hyderabad"),
-                        TransportType.BUS, 20, 60).toString(),
+                        TransportType.BUS, 110, 60).toString(),
                 graph3fastest2.get(1).toString());
     }
 
@@ -249,8 +252,79 @@ public class GraphTest {
                 "Bangalore",
                 "Hyderabad");
         Assert.assertEquals(new Transport(new City("Bangalore"),
-                new City("Hyderabad"),
-                        TransportType.BUS,20, 60).toString(),
+                new City("Chennai"),
+                        TransportType.BUS,5, 180).toString(),
                 graph3cheapest2.get(0).toString());
+
+        Assert.assertEquals(new Transport(new City("Chennai"),
+                new City("Hyderabad"),
+                TransportType.PLANE,100, 180).toString(),
+                graph3cheapest2.get(1).toString());
+    }
+
+    /**
+     * Tests mostDirectRoute for CSV 1
+     */
+    @Test
+    public void testDirect1() {
+        List<Transport> list1 = this.travelController1.
+                mostDirectRoute("Providence","New York City");
+
+        Assert.assertEquals(list1.size(),2);
+        Assert.assertEquals(list1.get(1).toString(),
+                new Transport(new City("Boston"),
+                new City("New York City"), TransportType.PLANE,
+                        267, 50).toString());
+        Assert.assertEquals(list1.get(0).getTarget().toString(),
+                new City("Boston").toString());
+
+        List<Transport> list2 = this.travelController1.
+                mostDirectRoute("New York City","Providence");
+        Assert.assertEquals(list2.size(),1);
+
+        List<Transport> list3 = this.travelController1.
+                mostDirectRoute("Boston","Boston");
+        Assert.assertEquals(list3.size(),0);
+    }
+
+    /**
+     * Tests mostDirectRoute for CSV 2
+     */
+    @Test
+    public void testDirect2() {
+        List<Transport> list1 = this.travelController2.
+                mostDirectRoute("Providence","Boston");
+        Assert.assertEquals(list1,new LinkedList<>());
+
+        List<Transport> list2 = this.travelController2.
+                mostDirectRoute("Boston","Providence");
+        Assert.assertEquals(100, list2.get(0).getPrice(), DELTA);
+        Assert.assertEquals(1, list2.size());
+
+        List<Transport> list3 = this.travelController2.
+                mostDirectRoute("Boston","Chicago");
+        Assert.assertEquals(2, list3.size());
+        Assert.assertEquals(list3.get(1).getTarget().toString(),"Chicago");
+    }
+
+    /**
+     * Tests mostDirectRoute for CSV 3
+     */
+    @Test
+    public void testDirect3() {
+        List<Transport> list1 = this.travelController3.
+                mostDirectRoute("Hyderabad","Chennai");
+
+        Assert.assertEquals(list1.size(),2);
+        Assert.assertEquals(list1.get(1).getSource().toString(),
+                new City("Bangalore").toString());
+        Assert.assertEquals(list1.get(0).toString(),
+                new Transport(new City("Hyderabad"),
+                new City("Bangalore"),TransportType.BUS,
+                        20, 60).toString());
+
+        List<Transport> list2 = this.travelController3.
+                mostDirectRoute("Chennai","Hyderabad");
+        Assert.assertEquals(list2.size(),1);
     }
 }

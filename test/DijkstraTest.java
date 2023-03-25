@@ -3,12 +3,8 @@ package test;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import sol.City;
-import sol.Dijkstra;
-import sol.Transport;
-import sol.TravelController;
+import sol.*;
 import src.IDijkstra;
-import src.TransportType;
 import test.simple.SimpleEdge;
 import test.simple.SimpleGraph;
 import test.simple.SimpleVertex;
@@ -24,9 +20,6 @@ import static org.junit.Assert.assertEquals;
  * expect you to write more tests using the City and Transport classes.
  * You are welcome to write more tests using the Simple classes, but you will not be graded on
  * those.
- *
- * TODO: Recreate the test below for the City and Transport classes
- * TODO: Expand on your tests, accounting for basic cases and edge cases
  */
 public class DijkstraTest {
 
@@ -38,6 +31,30 @@ public class DijkstraTest {
     private SimpleVertex c;
     private SimpleVertex d;
     private SimpleVertex e;
+    private TravelGraph graph1;
+    private TravelGraph graph2;
+    private TravelGraph graph3;
+    private Function <Transport, Double> transportPriceCalculation;
+    private Function <Transport, Double> transportTimeCalculation;
+
+    @Before
+    public void getAllGraphs(){
+        TravelController t1 = new TravelController();
+        t1.load("data/cities1.csv", "data/transport1.csv");
+        this.graph1 = t1.getGraph();
+
+        TravelController t2 = new TravelController();
+        t2.load("data/cities2.csv", "data/transport2.csv");
+        this.graph2 = t2.getGraph();
+
+        TravelController t3 = new TravelController();
+        t3.load("data/cities3.csv", "data/transport3.csv");
+        this.graph3 = t3.getGraph();
+
+        this.transportPriceCalculation = e -> e.getPrice();
+        this.transportTimeCalculation = e -> e.getMinutes();
+
+    }
 
     /**
      * Creates a simple graph.
@@ -94,5 +111,82 @@ public class DijkstraTest {
         assertEquals(2, path.size());
     }
 
+    @Test
+    public void testGraph1() {
+        IDijkstra<City, Transport> dijkstra = new Dijkstra<>();
+
+        List<Transport> path =
+                dijkstra.getShortestPath(this.graph1,
+                        this.graph1.getCityByName("Boston"),
+                        this.graph1.getCityByName("Providence"),
+                        this.transportPriceCalculation);
+        assertEquals(7, path.get(0).getPrice(), DELTA);
+        assertEquals(1, path.size());
+
+        List<Transport> path2 = dijkstra.getShortestPath(this.graph1,
+                this.graph1.getCityByName("Providence"),
+                this.graph1.getCityByName("New York City"),
+                this.transportPriceCalculation);
+        Assert.assertEquals(274, path2.get(0).getPrice()+
+                        path2.get(1).getPrice(),
+                DELTA);
+        Assert.assertEquals(267, path2.get(1).getPrice(), DELTA);
+        Assert.assertEquals(7, path2.get(0).getPrice(), DELTA);
+        Assert.assertEquals(2, path2.size());
+
+
+        List<Transport> path3 = dijkstra.getShortestPath(this.graph1,
+                this.graph1.getCityByName("Providence"),
+                this.graph1.getCityByName("New York City"),
+                this.transportTimeCalculation);
+        Assert.assertEquals(80, path3.get(0).getMinutes(), DELTA);
+        Assert.assertEquals(50, path3.get(1).getMinutes(), DELTA);
+        Assert.assertEquals(2, path3.size(), DELTA);
+    }
+
+    @Test
+    public void testGraph2() {
+        IDijkstra<City, Transport> dijkstra = new Dijkstra<>();
+
+        List<Transport> path4 = dijkstra.getShortestPath(this.graph2,
+                this.graph2.getCityByName("Boston"),
+                this.graph2.getCityByName("Providence"),
+                this.transportPriceCalculation);
+        Assert.assertEquals(3, path4.get(0).getPrice(), DELTA);
+        Assert.assertEquals(2, path4.get(1).getPrice(), DELTA);
+        Assert.assertEquals(1, path4.get(2).getPrice(), DELTA);
+        Assert.assertEquals(1, path4.get(0).getMinutes(), DELTA);
+
+        List<Transport> path5 = dijkstra.getShortestPath(this.graph2,
+                this.graph2.getCityByName("Washington"),
+                this.graph2.getCityByName("Chicago"),
+                this.transportTimeCalculation);
+        Assert.assertEquals(1, path5.get(0).getMinutes(), DELTA);
+    }
+
+    @Test
+    public void testGraph3(){
+        IDijkstra<City, Transport> dijkstra = new Dijkstra<>();
+
+        List<Transport> path6 = dijkstra.getShortestPath(this.graph3,
+                this.graph3.getCityByName("Chennai"),
+                this.graph3.getCityByName("Bangalore"),
+                this.transportPriceCalculation);
+        Assert.assertEquals(30, path6.get(0).getMinutes(), DELTA);
+
+        List<Transport> path7 = dijkstra.getShortestPath(this.graph3,
+                this.graph3.getCityByName("Bangalore"),
+                this.graph3.getCityByName("Hyderabad"),
+                this.transportPriceCalculation);
+        Assert.assertEquals(5, path7.get(0).getPrice(), DELTA);
+        Assert.assertEquals(100, path7.get(1).getPrice(), DELTA);
+        Assert.assertEquals(2, path7.size(), DELTA);
+
+        List<Transport> path8 = dijkstra.getShortestPath(this.graph3,
+                this.graph3.getCityByName("Bangalore"),
+                this.graph3.getCityByName("Hyderabad"),
+                this.transportTimeCalculation);
+        Assert.assertEquals(60, path8.get(0).getMinutes(), DELTA);
+    }
 
 }

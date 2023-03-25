@@ -1,0 +1,19 @@
+digraph TravelPlanner {
+	node [shape="plaintext" style="filled, rounded" fontname="Lato" margin=0.2]
+	edge [fontname="Lato" labeldistance=5]
+	"Chennai"
+	"Hyderabad"
+	"Bangalore"
+	"Chennai" -> "Hyderabad" [label="Type: plane\nPrice: $100.00\nTime: 180.00 minutes
+"]
+	"Chennai" -> "Bangalore" [label="Type: train\nPrice: $15.00\nTime: 30.00 minutes
+"]
+	"Chennai" -> "Chennai" [label="Type: bus\nPrice: $0.00\nTime: 0.00 minutes
+"]
+	"Bangalore" -> "Chennai" [label="Type: bus\nPrice: $5.00\nTime: 180.00 minutes
+"]
+	"Bangalore" -> "Hyderabad" [label="Type: bus\nPrice: $110.00\nTime: 60.00 minutes
+"]
+	"Hyderabad" -> "Bangalore" [label="Type: bus\nPrice: $20.00\nTime: 60.00 minutes
+"]
+}
