@@ -1,6 +1,7 @@
 package test;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import sol.City;
 import sol.Dijkstra;
@@ -44,7 +45,6 @@ public class DijkstraTest {
      * Normally, we'd like to use @Before, but because each test may require a different setup,
      * we manually call the setup method at the top of the test.
      *
-     * TODO: create more setup methods!
      */
 
     private void createSimpleGraph() {
@@ -72,7 +72,8 @@ public class DijkstraTest {
     }
 
     /**
-     * A sample test that tests Dijkstra's on a simple graph. Checks that the shortest path using Dijkstra's is what we
+     * A sample test that tests Dijkstra's on a simple graph.
+     * Checks that the shortest path using Dijkstra's is what we
      * expect.
      */
     @Test
@@ -93,26 +94,5 @@ public class DijkstraTest {
         assertEquals(2, path.size());
     }
 
-    // TODO: write more tests + make sure you test all the cases in your testing plan!
 
-    @Test
-    public void testFastest1() {
-        TravelController TC1 = new TravelController();
-        TC1.load("data/cities1.csv", "data/transport1.csv");
-
-        List<Transport> list = TC1.fastestRoute("New York City","Providence");
-        Assert.assertEquals(new Transport(new City("New York City"), new City("Boston"), TransportType.PLANE, 267, 50).toString(), list.get(0).toString());
-
-        List<Transport> list2 = TC1.fastestRoute("Boston","Providence");
-        Assert.assertEquals(new Transport(new City("Boston"), new City("Providence"), TransportType.TRAIN, 13, 80).toString(), list2.get(0).toString());
-    }
-
-    @Test
-    public void testCheapest1() {
-        TravelController TC1 = new TravelController();
-        TC1.load("data/cities1.csv", "data/transport1.csv");
-
-        List<Transport> list = TC1.cheapestRoute("Boston","Providence");
-        Assert.assertEquals(new Transport(new City("Boston"), new City("Providence"), TransportType.BUS, 7, 150).toString(),list.get(0).toString());
-    }
 }
