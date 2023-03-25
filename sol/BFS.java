@@ -13,8 +13,6 @@ import java.util.*;
  */
 public class BFS<V extends IVertex<E>, E extends IEdge<V>> implements IBFS<V, E> {
 
-    // TODO: implement the getPath method!
-
     /**
      * Method that gets the path from a start to end vertex as a list of nodes.
      * @param graph the graph including the vertices
@@ -62,6 +60,4 @@ public class BFS<V extends IVertex<E>, E extends IEdge<V>> implements IBFS<V, E>
         return path;
     }
 
-    // TODO: feel free to add your own methods here!
-    // hint: maybe you need to get a City by its name
 }

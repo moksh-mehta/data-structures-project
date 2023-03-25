@@ -17,12 +17,10 @@ public class City implements IVertex<Transport> {
      * @param name The name of the city
      */
     public City(String name) {
-        // TODO: implement this method
         this.name = name;
         this.outgoing = new HashSet<Transport>();
     }
 
-    // TODO: implement this method
 
     /**
      * Gets the outgoing field
@@ -32,8 +30,6 @@ public class City implements IVertex<Transport> {
     public Set<Transport> getOutgoing() {
         return this.outgoing;
     }
-
-    // TODO: implement this method
 
     /**
      * Adds an outgoing edge to the city

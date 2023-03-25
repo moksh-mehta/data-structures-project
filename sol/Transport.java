@@ -26,7 +26,6 @@ public class Transport implements IEdge<City>, ITransport {
      */
     public Transport(City source, City destination, TransportType type, double price,
                      double minutes) {
-        // TODO: implement this method
         this.source = source;
         this.destination = destination;
         this.type = type;
@@ -34,7 +33,6 @@ public class Transport implements IEdge<City>, ITransport {
         this.minutes = minutes;
     }
 
-    // TODO: implement this method
 
     /**
      * Getter method for the source
@@ -49,13 +47,11 @@ public class Transport implements IEdge<City>, ITransport {
      * Getter method for the target
      * @return the target
      */
-    // TODO: implement this method
     @Override
     public City getTarget() {
         return this.destination;
     }
 
-    // TODO: implement this method
 
     /**
      * Getter method for the price
@@ -66,7 +62,6 @@ public class Transport implements IEdge<City>, ITransport {
         return this.price;
     }
 
-    // TODO: implement this method
 
     /**
      * Getter method for the minutes
@@ -77,7 +72,6 @@ public class Transport implements IEdge<City>, ITransport {
         return this.minutes;
     }
 
-    // TODO: implement this method
     /**
      * Getter method for the type
      * @return the type

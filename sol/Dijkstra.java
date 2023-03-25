@@ -17,7 +17,6 @@ import static java.lang.Double.MAX_VALUE;
  */
 public class Dijkstra<V extends IVertex<E>, E extends IEdge<V>> implements IDijkstra<V, E> {
 
-    // TODO: implement the getShortestPath method!
 
     /**
      * Gets the shortest path from a source to the destination using Dijkstra's algorithm
@@ -85,5 +84,4 @@ public class Dijkstra<V extends IVertex<E>, E extends IEdge<V>> implements IDijk
         return path;
     }
 
-    // TODO: feel free to add your own methods here!
 }

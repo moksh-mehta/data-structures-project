@@ -30,7 +30,6 @@ public class TravelGraph implements IGraph<City, Transport> {
      */
     @Override
     public void addVertex(City vertex) {
-        // TODO: implement this method!
         this.vertices.add(vertex);
         this.test1.put(vertex.toString(), vertex);
     }
@@ -42,7 +41,6 @@ public class TravelGraph implements IGraph<City, Transport> {
      */
     @Override
     public void addEdge(City origin, Transport edge) {
-        // TODO: implement this method!
         this.test1.get(origin.toString()).addOut(edge);
     }
 
@@ -52,7 +50,6 @@ public class TravelGraph implements IGraph<City, Transport> {
      */
     @Override
     public Set<City> getVertices() {
-        // TODO: implement this method!
         return this.vertices;
     }
 
@@ -63,7 +60,6 @@ public class TravelGraph implements IGraph<City, Transport> {
      */
     @Override
     public City getEdgeSource(Transport edge) {
-        // TODO: implement this method!
         return edge.getSource();
     }
 
@@ -74,7 +70,6 @@ public class TravelGraph implements IGraph<City, Transport> {
      */
     @Override
     public City getEdgeTarget(Transport edge) {
-        // TODO: implement this method!
         return edge.getTarget();
     }
 
@@ -85,12 +80,8 @@ public class TravelGraph implements IGraph<City, Transport> {
      */
     @Override
     public Set<Transport> getOutgoingEdges(City fromVertex) {
-        // TODO: implement this method!
         return fromVertex.getOutgoing();
     }
-
-    // TODO: feel free to add your own methods here!
-    // hint: maybe you need to get a City by its name
 
     /**
      * Method that gets a city by its name
